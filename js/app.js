@@ -48,6 +48,7 @@ function create_card(title, description){
   a.className = 'btn btn-danger';
   a.textContent = 'Eliminar';
 
+  p2.addEventListener('click', delete_card);
   p2.appendChild(a);
   caption.appendChild(h3);
   caption.appendChild(p1);
@@ -57,6 +58,19 @@ function create_card(title, description){
   div.appendChild(thumbnail);
 
   row.appendChild(div);
+}
+
+function delete_card(e) {
+  let ancestor = get_ancestor(e.target, 4);
+  row.removeChild(ancestor);
+}
+
+function get_ancestor(ancestor, level) {
+  if (level == 0) {
+    return ancestor;
+  }
+  level--;
+  return get_ancestor(ancestor.parentElement, level);
 }
 
 function create_card_by_innerHTML(title, description){
